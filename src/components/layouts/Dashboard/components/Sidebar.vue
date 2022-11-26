@@ -19,7 +19,7 @@
 </v-list>
 </template>
 <script>
-import nav from './_navs_menu'
+import nav from '../services/_navs_menu'
 import {
     mapGetters,
 } from 'vuex'

@@ -46,15 +46,8 @@
                             </template>
                             <span>Desactivar seleccionados</span>
                         </v-tooltip>
-                        <!-- <v-btn icon class="mr-2">
-                        <v-icon>mdi-format-align-right</v-icon>
-                    </v-btn>
-                    <v-btn icon class="mr-2">
-                        <v-icon>mdi-format-align-justify</v-icon>
-                    </v-btn> -->
                     </div>
                 </v-toolbar>
-                <!-- <v-divider></v-divider>             -->
             </template>
             <template v-slot:[`item.nombre_completo`]="{item}">
                 <v-list-item class="pa-0" :ripple="false" link @click="$router.push({ name: 'usuariosDetail', params: { idUsuario: item.usuario_id }})">
@@ -95,7 +88,6 @@
                     </v-chip>
                 </span>
             </template>
-          
             <template v-slot:[`item.actions`]="{ item }">
                 <v-btn-toggle v-model="toggle_none">
                     <v-btn small icon @click="$router.push({path:'/usuarios/detail/'+item.usuario_id})">
@@ -122,7 +114,6 @@
     </v-snackbar>
 </div>
 </template>
-
 <script>
 import {
     mapActions,

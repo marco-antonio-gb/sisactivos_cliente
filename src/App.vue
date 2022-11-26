@@ -1,7 +1,7 @@
 <template>
 <v-app >
     
-    <router-view :key="$route.fullPath+version"></router-view>
+    <router-view ></router-view>
 </v-app>
 </template>
 <script>

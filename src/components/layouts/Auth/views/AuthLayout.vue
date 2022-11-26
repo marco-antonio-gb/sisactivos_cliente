@@ -15,7 +15,7 @@
                                     <h3>Iniciar sesion</h3>
                                     <p>Ingrese tu correo y contraseña</p>
                                 </div>
-                               
+
                                 <v-text-field validate-on-blur v-model="form.correo" :rules="emailRules" prepend-icon="mdi-account" name="Correo" label="Correo" type="text"></v-text-field>
                                 <v-text-field validate-on-blur v-model="form.password" :rules="passRules" prepend-icon="mdi-lock" name="Contraseña" label="Contraseña" type="password"></v-text-field>
                                 <v-alert class="mt-3 mb-3" color="error" @input="clearError" dense dismissible text v-if="error"><small>{{ error }}</small></v-alert>
@@ -57,10 +57,7 @@
 </template>
 
 <script>
-import {
-    mapActions,
-
-} from "vuex";
+import AuthLayoutServices from '../services/AuthLayoutServices'
 export default {
     name: "Login",
     data() {
@@ -99,56 +96,9 @@ export default {
             },
         };
     },
-    methods: {
-        clearError(){
-            this.error=""
-        },
-        onResize() {
-            this.windowHeight = window.innerWidth;
-        },
-        ...mapActions({
-            signIn: "auth/signIn",
-            attemp: "auth/attempt",
-
-            setroute: "auth/set_route",
-        }),
-        handleSubmit() {
-
-            if (navigator.onLine) {
-                if (this.$refs.form.validate()) {
-                    this.submitted = true;
-                    this.clearError()
-                    this.signIn(this.form)
-                        .then((response) => {
-                            if (response.data.success) {
-                                this.attemp(response.data.access_token)
-                                    .then(() => {
-                                        this.setroute();
-                                    })
-                                    .catch((error) => {
-                                        this.error = error;
-                                    });
-                            } else {
-                                this.error = response.data.message;
-                            }
-                            this.submitted = false;
-                        })
-                        .catch((err) => {
-                            this.submitted = false;
-                            if (err.response) {
-                                this.error = err.response.data.error;
-                            } else {
-                                this.error = "No se puede conectar al servidor";
-                            }
-                        });
-                } else {
-                    this.error = "Complete los datos requeridos";
-                }
-            } else {
-                this.error = "No se puede conectar a Internet.";
-            }
-        },
-    },
+    mixins: [
+        AuthLayoutServices
+    ]
 
 };
 </script>

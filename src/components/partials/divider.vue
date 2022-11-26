@@ -3,7 +3,7 @@
     <span class="font-weight-medium body-2 grey--text   text--darken-1">
         {{title}}
     </span>
-    <v-divider class="mt-1"></v-divider>
+    <!-- <v-divider class="mt-1"></v-divider> -->
 </div>
 </template>
 <script>

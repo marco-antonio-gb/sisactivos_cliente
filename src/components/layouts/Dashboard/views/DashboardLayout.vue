@@ -95,9 +95,9 @@
 <script>
 import {
     mapGetters,
-    mapActions
 } from "vuex";
-import Sidebar from "../partials/sidebar";
+import DashboardLayoutServices from '../services/DashboardLayoutServices';
+import Sidebar from "../components/Sidebar";
 export default {
     data() {
         return {
@@ -128,14 +128,9 @@ export default {
     components: {
         Sidebar,
     },
-    methods: {
-        ...mapActions({
-            signOutAction: "auth/signOut",
-        }),
-        signOut() {
-            this.signOutAction()
-        },
-    },
+    mixins:[
+		DashboardLayoutServices
+	],
     computed: {
         ...mapGetters({
             authenticated: "auth/authenticated",

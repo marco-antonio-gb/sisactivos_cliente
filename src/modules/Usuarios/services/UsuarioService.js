@@ -63,14 +63,15 @@ export default {
     async update(ID) {
       this.onSave = true;
       try {
-        const { data } = await this.axios.put(URL + "/" + ID, this.usuario);
-        if (data.success) {
-          this.showSnackbar(data.message, true, "success");
+        let response = await this.axios.put(URL + "/" + ID, this.usuario);
+        console.log(response)
+        if (response.data.success) {
+          this.showSnackbar(response.data.message, true, "success");
           setTimeout(() => {
             this.$router.go(-1);
           }, 500);
         } else {
-          this.showSnackbar(data.validator, true, "success");
+          this.showSnackbar(response.data.errors, true, "warning");
         }
         this.onSave = false;
       } catch (error) {

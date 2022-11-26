@@ -5,7 +5,7 @@
     <div class="d-flex justify-space-between d-flex align-center   mb-3">
         <goback />
         <v-spacer></v-spacer>
-        <v-btn  depressed @click="$router.push({path:'/usuarios/update/'+$route.params.idUsuario})">
+        <v-btn depressed @click="$router.push({path:'/usuarios/update/'+$route.params.idUsuario})">
             <span>
                 <v-icon>mdi-pencil-outline</v-icon> Editar
             </span>
@@ -16,21 +16,22 @@
         <v-card-text>
             <v-row>
                 <v-col cols="12" sm="3" class="text-center">
-                    <v-hover v-slot="{ hover }">
-                        <v-avatar size="200" class="profile-pic-update  avatar-shadow">
-                            <v-img :src="url+usuario.foto" alt="Logo Empresa " v-if="usuario.foto"></v-img>
+                    <v-card flat max-width="200" class="transparent mx-auto">
+                       
+                        <v-avatar size="200" class="profile-pic-update  avatar-shadow"  >
+                            <v-img :src="url+usuario.foto" @error="usuario.foto=null" alt="Avatar usuario " v-if="usuario.foto"></v-img>
                             <v-avatar :color="usuario.avatar_color" size="200" v-else>
                                 <span class="white--text display-4 font-weight-regular">{{usuario.avatar_letter}}</span>
                             </v-avatar>
-                            <div class=" hover-icon  ">
-                                <v-btn large :class="{ 'show-btns': !hover }" icon title="Cambiar imagen">
-                                    <v-icon :class="{ 'show-btns': !hover }">
-                                        mdi-camera-plus
-                                    </v-icon>
-                                </v-btn>
-                            </div>
                         </v-avatar>
-                    </v-hover>
+                       
+                        <v-fab-transition>
+                            <v-btn small title="Cambiar imagen" absolute bottom right fab @click="openDialogImage">
+                                <v-icon>mdi-camera</v-icon>
+                            </v-btn>
+                        </v-fab-transition>
+                    </v-card>
+
                 </v-col>
                 <v-col cols="12" sm="9">
                     <v-list two-line>
@@ -110,11 +111,11 @@
         <v-card-text>
             <div v-for="rol in usuario.roles" :key="rol.id" class="ma-4">
                 <h3 class="text--primary mb-2">
-                  Rol:   {{rol}}
+                    Rol: {{rol}}
                 </h3>
-                 <span v-for="permiso in usuario.permisos" :key="permiso">
-                        <v-chip small class="mr-1 mb-1"> {{permiso}}</v-chip>
-                 </span>
+                <span v-for="permiso in usuario.permisos" :key="permiso">
+                    <v-chip small class="mr-1 mb-1"> {{permiso}}</v-chip>
+                </span>
             </div>
         </v-card-text>
     </v-card>
@@ -136,7 +137,7 @@
                 </v-col>
                 <v-col cols="8">
                     <p>Envie un correo electronico para que el usuario restablesca su nueva contraseña.</p>
-                    <v-btn depressed  @click.prevent="sendEmailReset(usuario.correo)">Enviar correo </v-btn>
+                    <v-btn depressed @click.prevent="sendEmailReset(usuario.correo)">Enviar correo </v-btn>
                 </v-col>
                 <v-col cols="12">
                     <v-divider></v-divider>
@@ -156,6 +157,7 @@
         </v-card-text>
     </v-card>
     <ConfirmDlg ref="confirm" />
+    <UpdateImage :dialogImage.sync="dialogImage" @updateParentImage="updateParentImage"></UpdateImage>
     <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
         <pre class="snackText">{{snackbar.message_snack}}</pre>
         <template v-slot:action="{ attrs }">
@@ -167,6 +169,7 @@
     <updatePassword :dialogUpdatePass.sync="dialogUpdatePass" @clickUpdatePass="clickUpdatePass" :usuario_id="this.$route.params.usuario_id" />
 </div>
 </template>
+
 <script>
 import {
     mapActions,
@@ -177,6 +180,7 @@ import UsuarioService from '../services/UsuarioService'
 export default {
     data() {
         return {
+            dialogImage: false,
             url: process.env.VUE_APP_URL_MEDIA + '/usuarios/',
             pass_data: " ",
             onblockUser: false,
@@ -292,16 +296,23 @@ export default {
             if (
                 await this.$refs.confirm.open(
                     "Restablecer contraseña",
-                    "Se enviara un correo a: <b>"+correo+"</b> ¿Seguro que quieres continuar?"
+                    "Se enviara un correo a: <b>" + correo + "</b> ¿Seguro que quieres continuar?"
                 )
             ) {
                 this.resetPassword(correo);
             }
         },
+        openDialogImage() {
+            this.dialogImage = true
+        },
+        updateParentImage() {
+            this.show(this.$route.params.idUsuario)
+        }
     },
     components: {
         updatePassword,
         ConfirmDlg: () => import("@/components/partials/ConfirmDlg"),
+        UpdateImage: () => import('../components/updateImage.vue')
     },
     computed: {
         ...mapGetters({

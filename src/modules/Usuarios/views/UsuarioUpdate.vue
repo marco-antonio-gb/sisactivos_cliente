@@ -1,6 +1,6 @@
 <template>
 <div>
-    <loader :onLoading="onLoading"/>
+    <loader :onLoading="onLoading" />
     <div class="d-flex justify-space-between d-flex align-center  mb-3">
         <goback />
         <div>
@@ -9,7 +9,7 @@
     </div>
     <!-- ------------------- CONTENIDO PRINCIPAL ------------------------ -->
     <v-form ref="updateUsuarioForm" @submit.prevent="update($route.params.idUsuario)">
-        <v-card  outlined>
+        <v-card outlined>
             <v-card-text>
                 <v-subheader>
                     Datos personales
@@ -35,17 +35,15 @@
                             <v-select outlined dense hide-details="auto" v-model="usuario.ci_ext" item-value="value" item-text="text" :items="options_ci" :rules="ciExtRules" label="Extension*" required></v-select>
                         </v-col>
                         <v-col cols="12" sm="4">
-                            <v-text-field label="Celular *" outlined dense hide-details="auto" :rules="numeroRules" required v-model="usuario.celular"></v-text-field>
+                            <v-text-field label="Correo*" outlined dense hide-details="auto" required :rules="correoRules" v-model="usuario.correo"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="4">
+                         <v-col cols="12" sm="3">
                             <v-text-field label="Telefono" outlined dense hide-details="auto" v-model="usuario.telefono"></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="4">
-                            <v-text-field label="Correo*" outlined dense hide-details="auto" required :rules="correoRules" v-model="usuario.email"></v-text-field>
+                        <v-col cols="12" sm="5">
+                            <v-text-field label="Direccion" outlined dense hide-details="auto" v-model="usuario.direccion" prepend-inner-icon="mdi-map-marker"></v-text-field>
                         </v-col>
-                        <!-- <v-col cols="12">
-                        <v-text-field label="Direccion"    hide-details="auto" v-model="usuario.direccion" prepend-inner-icon="mdi-map-marker"></v-text-field>
-                    </v-col> -->
+                       
                     </v-row>
                 </div>
                 <v-subheader>
@@ -63,13 +61,12 @@
                 <v-btn @click="cancelUpdateUsuario" text>
                     Cancelar
                 </v-btn>
-                <v-btn depressed :loading="onSave" :disabled="onSave" color="error" type="submit">
-                    Actualizar informacion
+                <v-btn depressed :loading="onSave" :disabled="onSave" color="primary" type="submit">
+                    Aceptar
                 </v-btn>
             </v-card-actions>
         </v-card>
     </v-form>
-     
     <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
         <pre class="snackText">{{snackbar.message_snack}}</pre>
         <template v-slot:action="{ attrs }">
@@ -100,7 +97,7 @@ import RolesService from '@/modules/Roles/services/RolService';
 export default {
     data() {
         return {
-             onLoading:false,
+            onLoading: false,
             show1: false,
             roles: [],
             usuario: {
@@ -112,7 +109,7 @@ export default {
                 direccion: '',
                 celular: '',
                 telefono: '',
-                email: '',
+                correo: '',
                 password: '',
                 cargo: '',
                 roles: [],
@@ -145,11 +142,11 @@ export default {
         this.getRoles()
         this.show(this.$route.params.idUsuario)
     },
-    methods:{
-        setSettingsUser(names){
-            this.usuario.settings.avatarColor=this.getcolorAvatar(names.target.value);
-            this.usuario.settings.avatarLetter=this.acronym(names.target.value,1);
-            this.usuario.settings.userName=names.target.value;
+    methods: {
+        setSettingsUser(names) {
+            this.usuario.settings.avatarColor = this.getcolorAvatar(names.target.value);
+            this.usuario.settings.avatarLetter = this.acronym(names.target.value, 1);
+            this.usuario.settings.userName = names.target.value;
         }
     },
     mixins: [

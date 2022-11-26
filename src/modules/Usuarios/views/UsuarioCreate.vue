@@ -45,14 +45,12 @@
                             <v-col cols="12" sm="6">
                                 <v-text-field label="Telefono" hide-details="auto" dense outlined v-model="usuario.telefono"></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="6">
-                                <v-text-field label="Correo *" validate-on-blur required hide-details="auto" dense outlined :rules="correoRules" v-model="usuario.correo"></v-text-field>
-                            </v-col>
+                           
                             <v-col cols="12" sm="6">
                                 <v-text-field label="Cargo *" required hide-details="auto" dense outlined :rules="cargoRules" v-model="usuario.cargo"></v-text-field>
                             </v-col>
 
-                            <v-col cols="12">
+                            <v-col cols="12" sm="6">
                                 <v-text-field label="Direccion *" required hide-details="auto" dense outlined v-model="usuario.direccion"></v-text-field>
                             </v-col>
                         </v-row>
@@ -60,22 +58,16 @@
                         <v-row>
                             <v-col cols="12" sm="6">
                                 <div class="d-flex">
-                                    <!-- <v-btn @click="copyEmail" icon>
-                                        <v-icon color="grey lighten-1">mdi-content-copy</v-icon>
-                                    </v-btn> -->
-                                    <v-text-field @focus="generateUser" label="Nombre de usuario  *" hide-details="auto" dense outlined required :rules="usernameRules" v-model="usuario.username"></v-text-field>
-                                    <v-btn class="ml-2" @click="generateUser" color="primary" text icon>
-                                        <v-icon>mdi-account-convert</v-icon>
-                                    </v-btn>
-
+                                    
+                                    
+                                     <v-text-field label="Correo *" validate-on-blur required hide-details="auto" dense outlined :rules="correoRules" v-model="usuario.correo"></v-text-field>
+ 
                                 </div>
-                                <!-- <v-btn @click="generateName">Generar  </v-btn> -->
+                                
                             </v-col>
                             <v-col cols="12" sm="6">
                                 <div class="d-flex">
-                                    <!-- <v-btn @click="copyPassword" icon>
-                                        <v-icon color="grey lighten-1">mdi-content-copy</v-icon>
-                                    </v-btn> -->
+                                    
                                     <v-text-field v-model="usuario.password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show1 ? 'text' : 'password'" label="Contraseña" dense hide-details="auto" outlined hint="Minimo 8 caracteres" counter @click:append="show1 = !show1"></v-text-field>
                                     <v-btn class="ml-2" @click="openDialogPass" text icon color="primary">
                                         <v-icon>mdi-lock-reset</v-icon>
