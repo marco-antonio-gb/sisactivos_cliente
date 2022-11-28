@@ -5,7 +5,7 @@
             <v-layout align-center justify-center>
                 <v-flex>
                     <v-form @submit.prevent="handleSubmit" lazy-validation ref="form">
-                        <v-card max-width="380" class="mx-auto" :flat="$vuetify.breakpoint.mobile" :loading="submitted" :disabled="submitted">
+                        <v-card max-width="380" class="mx-auto" :flat="$vuetify.breakpoint.xs" :loading="submitted" :disabled="submitted">
                             <template slot="progress">
                                 <v-progress-linear color="primary" absolute indeterminate></v-progress-linear>
                             </template>
@@ -23,7 +23,7 @@
                                     <router-link class="text-decoration-none body-2" to="/forgot-password">¿No recuerdas la contraseña?</router-link>
                                 </div>
                                 <div class="mb-6">
-                                    <v-btn color="primary" block :disabled="submitted" type="submit">
+                                    <v-btn color="primary" depressed block :disabled="submitted" type="submit">
                                         <span v-if="submitted">
                                             Verificando...
                                         </span>

@@ -12,7 +12,7 @@
         </v-btn>
     </div>
     <divide title="Informacion personal"></divide>
-    <v-card class="mb-3" flat>
+    <v-card class="mb-3">
         <v-card-text>
             <v-row>
                 <v-col cols="12" sm="3" class="text-center">
@@ -107,7 +107,7 @@
         </v-card-text>
     </v-card>
     <divide title="Roles y Permisos"></divide>
-    <v-card class="mb-3" flat>
+    <v-card class="mb-3">
         <v-card-text>
             <div v-for="rol in usuario.roles" :key="rol.id" class="ma-4">
                 <h3 class="text--primary mb-2">
@@ -120,7 +120,7 @@
         </v-card-text>
     </v-card>
     <divide title="Seguridad"></divide>
-    <v-card class="mb-10" flat>
+    <v-card class="mb-10">
         <v-card-text>
             <v-row>
                 <!-- <v-col cols="4">

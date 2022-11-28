@@ -1,65 +1,60 @@
 <template>
 <v-app>
-    <v-container class="grow d-flex flex-column flex-nowrap login-back">
-        <v-layout align-center justify-center>
-            <v-card min-width="360" width="400" class="mx-auto login-pa" :disabled="submitted" outlined v-if="showForm">
-                <!-- <v-card min-width="360" class="mx-auto pa-8" :disabled="submitted"   :flat="windowHeight>460?false:true" outlined> -->
-                <loader :onLoading="submitted" :color="`primary`" />
-                <v-row class="flex-column">
-                    <v-col class=" ">
-                        <!-- <v-icon size="45" color="primary">mdi-lock</v-icon> -->
-                        <p class="text-h6 font-weight-bold">Restablecer la contraseña</p>
-                        <p class="body-2">Introduce la dirección de correo electrónico asociada a tu cuenta y te enviaremos un vínculo para restablecer tu contraseña.</p>
-                    </v-col>
+    <v-main>
+        <v-container fluid fill-height>
+            <v-layout align-center justify-center>
+                <v-flex>
                     <v-form @submit.prevent="submitForgotPass" ref="formForgotPass">
-                        <v-col>
-                            <v-text-field outlined validate-on-blur v-model="form.email" :rules="emailRules" label="Correo electronico" required ref="inputforgot"></v-text-field>
-                            <p class="red--text font-weight-bold body-2" v-if="show_error">{{error}}</p>
-                            <v-btn large depressed color="primary" :loading="submitted" block :disabled="submitted" type="submit">
-                                <span v-if="submitted">
-                                    Verificando...
-                                </span>
-                                <span v-else> Continuar </span>
-                            </v-btn>
-                            <v-btn block class="my-3" color="primary" text to="/login">Volver a inicio de sesión</v-btn>
-                        </v-col>
+                        <v-card max-width="380" class="mx-auto" :flat="$vuetify.breakpoint.xs" :loading="submitted" :disabled="submitted">
+                            <template slot="progress">
+                                <v-progress-linear color="primary" absolute indeterminate></v-progress-linear>
+                            </template>
+                            <v-card-text class="pa-11 text-center" v-if="showForm">
+                                <v-img src="@/assets/icons/mail-1021.svg" contain max-height="80" class="my-3"></v-img>
+                                <h3>Restablecer la contraseña</h3>
+                                <p class="body-2">Ingresa la dirección de correo electrónico de tu cuenta.</p>
+                                <v-text-field class="mt-6" validate-on-blur v-model="form.email" :rules="emailRules" label="Correo electronico" required ref="inputforgot"></v-text-field>
+                                <v-alert   color="error" @input="clearError" dense dismissible text v-if="show_error"><small>{{ error }}</small></v-alert>
+                                <v-btn class="my-3" depressed color="primary" block :disabled="submitted" type="submit">
+                                    <span v-if="submitted">
+                                        Enviando correo...
+                                    </span>
+                                    <span v-else> Continuar </span>
+                                </v-btn>
+                                <p class="my-6 custom-link" @click="$router.push({name:'login'})">Volver a inicio de sesión</p>
+
+                            </v-card-text>
+                            <v-card-text class="pa-11 text-center" v-else>
+                                <v-img src="@/assets/icons/mail-1013.svg" contain max-height="120"></v-img>
+                                <h3>Revisa tu correo electronico con las instrucciones para restablecer la contraseña.</h3>
+                                <p class="body-2">Tambien revisa tu carpeta de correo no deseado.</p>
+                                <p class="my-3 custom-link" @click="$router.push({name:'login'})">Ir a inicio de sesión</p>
+                            </v-card-text>
+                        </v-card>
                     </v-form>
-                   
-                </v-row>
-            </v-card>
-            <v-card v-else min-width="360" width="500" class="mx-auto login-pa"   outlined >
-              <!-- <v-card min-width="360" class="mx-auto pa-8" :disabled="submitted"   :flat="windowHeight>460?false:true" outlined> -->
-                <loader :onLoading="submitted" :color="`primary`" />
-                <v-row class="flex-column">
-                    <v-col class=" ">
-                        <!-- <v-icon size="45" color="primary">mdi-lock</v-icon> -->
-                        <p class="text-h6 font-weight-bold">Gracias. Comprueba si has recibido un correo electronico con las instrucciones para restablecer la contraseña.</p>
-                        <p class="body-2">Si no has recibo un correo electronico pasados 5 minutos, revisa tu carpeta de correo no deseado.</p>
-                        <v-btn block class="my-3" color="primary" text to="/login">Volver a inicio de sesión</v-btn>
-                    </v-col>
-                    
-                     
-                </v-row>
-            </v-card>
-        </v-layout>
-    </v-container>
-    <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
-        <pre class="snackText">{{ snackbar.message_snack }}</pre>
-        <template v-slot:action="{ attrs }">
-            <v-btn :color="snackbar.color_snack" text v-bind="attrs" @click="snackbar.show_snack = false">
-                Cerrar
-            </v-btn>
-        </template>
-    </v-snackbar>
+
+                </v-flex>
+            </v-layout>
+        </v-container>
+        <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
+            <pre class="snackText">{{ snackbar.message_snack }}</pre>
+            <template v-slot:action="{ attrs }">
+                <v-btn :color="snackbar.color_snack" text v-bind="attrs" @click="snackbar.show_snack = false">
+                    Cerrar
+                </v-btn>
+            </template>
+        </v-snackbar>
+    </v-main>
 </v-app>
 </template>
+
 <script>
 export default {
     name: "Login",
     data() {
         const year = new Date().getFullYear();
         return {
-            showForm:true,
+            showForm: true,
             show_error: false,
             error: "",
             show_version: false,
@@ -90,6 +85,15 @@ export default {
         };
     },
     methods: {
+        resetForm() {
+            this.showForm = true
+            this.$refs.formForgotPass.reset()
+            this.$refs.inputforgot.$refs.input.focus()
+
+        },
+		clearError(){
+            this.error=""
+        },
         async submitForgotPass() {
             if (this.$refs.formForgotPass.validate()) {
                 this.submitted = true
@@ -98,10 +102,15 @@ export default {
                 try {
                     let response = await this.axios.post('/forgot-password', this.form);
                     if (response.data.success) {
-                        this.showForm=false
+                        this.showForm = false
+                        this.showSnackbar(
+                            response.data.message,
+                            true,
+                            "success"
+                        );
                     } else {
                         this.$nextTick(() => {
-                            this.showForm=true
+                            this.showForm = true
                             this.show_error = true
                             this.error = response.data.message
                             this.$refs.inputforgot.$refs.input.focus()

@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="mb-3 d-flex align-center">
-        <h2>{{$route.meta.title}}</h2>
+        <goback :main_title="true" :arrow="false" />
         <v-spacer></v-spacer>
         <v-btn icon @click="reloadUsuarios" title="Actualizar">
             <v-icon>mdi-autorenew</v-icon>
@@ -25,7 +25,7 @@
             </v-list>
         </v-menu>
     </div>
-    <v-card flat>
+    <v-card>
         <v-card-title>
             <v-text-field v-model="search" append-icon="mdi-magnify" dense label="Buscar..." outlined hide-details="true"></v-text-field>
             <v-spacer></v-spacer>

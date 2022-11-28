@@ -9,7 +9,7 @@
     </div>
     <!-- ------------------- CONTENIDO PRINCIPAL ------------------------ -->
     <v-form ref="updateUsuarioForm" @submit.prevent="update($route.params.idUsuario)">
-        <v-card outlined>
+        <v-card>
             <v-card-text>
                 <v-subheader>
                     Datos personales

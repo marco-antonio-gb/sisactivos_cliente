@@ -5,7 +5,9 @@ const Inicio = () => import("@/modules/Inicio/Inicio.vue");
 
 import usuariosRoutes from "@/modules/Usuarios/router";
 import perfilRoutes from "@/modules/Perfil/router";
-
+import articulosRoutes from '@/modules/Articulos/router'
+import personasRoutes from '@/modules/Personas/router'
+import categoriasRoutes from '@/modules/Categorias/router'
 import {
 	_suspendaccount,
 	_unauthorized,
@@ -43,7 +45,10 @@ const routes = [
 				},
 			},
 			{ ...perfilRoutes },
+			{ ...personasRoutes },
 			{ ...usuariosRoutes },
+			{ ...categoriasRoutes },
+			{ ...articulosRoutes },
 		],
 	},
 	{ ..._suspendaccount },

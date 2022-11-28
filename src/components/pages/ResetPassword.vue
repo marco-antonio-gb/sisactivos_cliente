@@ -1,78 +1,84 @@
 <template>
 <v-app>
-    <v-container class="grow d-flex flex-column flex-nowrap login-back">
-        <v-layout align-center justify-center>
-            <v-card min-width="360" width="400" class="mx-auto login-pa" :disabled="submitted" outlined v-if="show_formReset">
-                <!-- <v-card min-width="360" class="mx-auto pa-8" :disabled="submitted"   :flat="windowHeight>460?false:true" outlined> -->
-                <loader :onLoading="submitted" :color="`primary`" />
-                <v-row class="flex-column">
-                    <v-col>
-                        <p class="text-h6 font-weight-bold">Restablecer contraseña</p>
-                    </v-col>
-                    <v-form @submit.prevent="updatePasswordUser" lazy-validation ref="formReset">
-                        <v-col>
-                            <v-text-field class="mb-3" @focus="$event.target.select()" outlined validate-on-blur v-model="password" :rules="passRules" label="Contraseña" required :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" name="input-10-1" @click:append="show1 = !show1" :disabled="onSave"></v-text-field>
-                            <v-text-field class="mb-3" @focus="$event.target.select()" outlined v-model="confirm_password" :rules="passRules.concat(passwordConfirmationRule)" label="Confirmar contraseña" required :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'" :type="show2 ? 'text' : 'password'" name="input-10-2" @click:append="show2 = !show2" :disabled="onSave"></v-text-field>
-                            <v-btn depressed color="primary" large block :disabled="submitted" type="submit">
-                                <span v-if="submitted">
-                                    Verificando...
-                                </span>
-                                <span v-else>Continuar</span>
-                            </v-btn>
-                        </v-col>
-                    </v-form>
-                    <div></div>
-                </v-row>
-            </v-card>
-            <v-card v-if="expiredToken" min-width="360" width="500" class="mx-auto login-pa" outlined>
-                <!-- <v-card min-width="360" class="mx-auto pa-8" :disabled="submitted"   :flat="windowHeight>460?false:true" outlined> -->
-                <loader :onLoading="submitted" :color="`primary`" />
-                <v-row class="flex-column">
-                    <v-col class="text-center">
-                        <v-icon size="30" color="gray">mdi-alert</v-icon>
-
-                        <p class="body-2 mt-2">Este vínculo para restablecer la contraseña ha caducado.</p>
-                        <v-btn block class="my-3" style="text-transform:inherit !important;" color="primary" text to="/login">Intenta restablecer tu contraseña nuevamente.</v-btn>
-                    </v-col>
-
-                </v-row>
-            </v-card>
-            <v-card min-width="360" width="500" class="mx-auto login-pa" outlined v-if="successReset">
-                <!-- <v-card min-width="360" class="mx-auto pa-8" :disabled="submitted"   :flat="windowHeight>460?false:true" outlined> -->
-                <loader :onLoading="submitted" :color="`primary`" />
-                <v-row class="flex-column">
-                    <v-col class="text-center">
-                        <p class="text-h6 font-weight-bold">Has cambiado con exito tu contraseña</p>
-
-                        <v-btn large class="my-3" color="primary" to="/login">Iniciar sesion</v-btn>
-                    </v-col>
-
-                </v-row>
-            </v-card>
-        </v-layout>
-    </v-container>
-   
-    <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
-        <pre class="snackText">{{ snackbar.message_snack }}</pre>
-        <template v-slot:action="{ attrs }">
-            <v-btn :color="snackbar.color_snack" text v-bind="attrs" @click="snackbar.show_snack = false">
-                Cerrar
-            </v-btn>
-        </template>
-    </v-snackbar>
+    <v-main>
+        <v-container fill fill-height>
+            <v-layout align-center justify-center>
+                <v-flex>
+                    <v-card max-width="380" class="mx-auto" :flat="$vuetify.breakpoint.xs" :loading="onReset" :disabled="onReset">
+                        <template slot="progress">
+                            <v-progress-linear color="primary" absolute indeterminate></v-progress-linear>
+                        </template>
+                        <v-card-text class="pa-11 text-center" v-if="loadingToken">
+                            <v-img src="@/assets/icons/mail-1021.svg" contain max-height="80" class="my-6"></v-img>
+                            <div style="width:150px;" class="mx-auto mb-3">
+                                <v-progress-linear color="primary" indeterminate rounded height="6"></v-progress-linear>
+                            </div>
+                            <p>Verificando token...</p>
+                        </v-card-text>
+                        <v-card-text class="pa-11 text-center" v-if="show_formReset">
+                            <v-row class="flex-column mb-6">
+                                <v-img src="@/assets/icons/login-password-11923.svg" contain max-height="80" class="mx-auto"></v-img>
+                                <v-col>
+                                    <h3>Establecer nueva contraseña</h3>
+                                    <password-meter :password="password" class="my-2" />
+                                    <span class="caption">La contraseña debe tener al menos 10 caracteres, incluye varias palabras y frases para hacerla mas segura.</span>
+                                </v-col>
+                                <v-form @submit.prevent="updatePasswordUser" lazy-validation ref="formReset">
+                                    <v-col>
+                                        <v-text-field @focus="$event.target.select()" validate-on-blur v-model="password" :rules="passRules" label="Nueva contraseña" required :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" name="input-10-1" @click:append="show1 = !show1" :disabled="onReset"></v-text-field>
+                                        <v-text-field @focus="$event.target.select()" v-model="confirm_password" :rules="passRules.concat(passwordConfirmationRule)" label="Confirmar nueva contraseña" required :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'" :type="show2 ? 'text' : 'password'" name="input-10-2" @click:append="show2 = !show2" :disabled="onReset"></v-text-field>
+                                        <v-btn depressed color="primary" block :disabled="onReset" type="submit">
+                                            <span v-if="onReset">
+                                                Verificando...
+                                            </span>
+                                            <span v-else>Cambiar contraseña</span>
+                                        </v-btn>
+                                    </v-col>
+                                </v-form>
+                            </v-row>
+                        </v-card-text>
+                    </v-card>
+                    <v-card v-if="expiredToken" min-width="380" width="380" class="mx-auto login-pa">
+                        <v-card-text class="pa-11 text-center">
+                            <v-img eager src="@/assets/icons/expired.png" max-height="120" contain></v-img>
+                            <loader :onLoading="onReset" :color="`primary`" />
+                            <p class="body-2 mt-2">Este vínculo para restablecer la contraseña ha caducado. Vuela a intentarlo.</p>
+                            <v-btn class="my-3" color="primary" depressed @click="$router.replace({path:'forgot-password'})">Volver a enviar correo</v-btn>
+                        </v-card-text>
+                    </v-card>
+                    <v-card min-width="380" width="380" class="mx-auto login-pa" v-if="successReset">
+                        <v-card-text class="pa-11 text-center">
+                            <v-img src="@/assets/icons/check-symbol-4794.svg" max-height="90" contain class="my-6"></v-img>
+                            <loader :onLoading="onReset" :color="`primary`" />
+                            <p class="text-h6 font-weight-bold">Has cambiado con exito tu contraseña</p>
+                            <v-btn depressed class="my-3" color="primary" @click="$router.replace({path:'login'})">Iniciar sesion</v-btn>
+                        </v-card-text>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+            <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
+                <pre class="snackText">{{ snackbar.message_snack }}</pre>
+                <template v-slot:action="{ attrs }">
+                    <v-btn :color="snackbar.color_snack" text v-bind="attrs" @click="snackbar.show_snack = false">
+                        Cerrar
+                    </v-btn>
+                </template>
+            </v-snackbar>
+        </v-container>
+    </v-main>
 </v-app>
 </template>
-
 <script>
+import passwordMeter from "vue-simple-password-meter";
 export default {
     name: "Login",
     data() {
         const year = new Date().getFullYear();
         return {
-            successReset:false,
-            expiredToken:false,
-            show_formReset: true,
-            onSave: false,
+            successReset: false,
+            expiredToken: false,
+            show_formReset: false,
+            onReset: false,
             show1: false,
             show2: false,
             show_version: false,
@@ -104,7 +110,11 @@ export default {
                 color_snack: "light",
                 timeout_snack: 5000,
             },
+            loadingToken: false
         };
+    },
+    components: {
+        passwordMeter
     },
     created() {
         this.token = this.$route.query.token
@@ -112,22 +122,25 @@ export default {
     },
     methods: {
         async validateToken() {
+            this.loadingToken = true
             let res = await this.axios.post('/validate-token', {
                 'token': this.$route.query.token
             });
             if (res.data.expired) {
-                this.expiredToken=true
+                this.loadingToken = false
+                this.expiredToken = true
                 this.show_formReset = false
             } else {
+                this.loadingToken = false
                 this.show_formReset = true
             }
-            this.successReset=false
+            this.successReset = false
+            this.loadingToken = false
         },
         updatePasswordUser() {
             if (this.$refs.formReset.validate()) {
-                this.onSave = true
-                this.overlay = true
-                
+                this.onReset = true
+             
                 let data_request = {
                     password: this.password,
                     confirm_password: this.confirm_password,
@@ -137,7 +150,7 @@ export default {
                     .post('/set-password-reset', data_request)
                     .then(response => {
                         if (response.data.success) {
-                            this.onSave = false
+                            this.onReset = false
                             this.showSnackbar(
                                 response.data.message,
                                 true,
@@ -145,11 +158,12 @@ export default {
                             );
                             this.show1 = false
                             this.show2 = false
-                            this.$refs.formReset.reset()
-                            this.successReset=true
+                            this.show_formReset=false
+							this.successReset = true
+                            // this.$refs.formReset.reset()
                         } else {
-                            this.successReset=false
-                            this.onSave = false
+                            this.successReset = false
+                            this.onReset = false
                             this.showSnackbar(
                                 response.data.message,
                                 true,
@@ -158,8 +172,8 @@ export default {
                         }
                     })
                     .catch(error => {
-                        this.successReset=false
-                        this.onSave = false
+                        this.successReset = false
+                        this.onReset = false
                         if (error.response) {
                             this.showSnackbar(
                                 error.response.data.message,
@@ -179,13 +193,18 @@ export default {
             }
         }
     },
-    
     computed: {
         passwordConfirmationRule() {
             return () =>
                 this.password === this.confirm_password || "La contraseña no coincide";
         },
-        
     },
 };
 </script>
+<style scoped>
+.input_container {
+    padding: 5px;
+    list-style-type: none;
+    text-align: left
+}
+</style>

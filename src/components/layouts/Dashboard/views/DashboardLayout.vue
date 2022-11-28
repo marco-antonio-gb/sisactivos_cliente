@@ -14,7 +14,7 @@
         </template>
         <Sidebar></Sidebar>
     </v-navigation-drawer>
-    <v-app-bar  app dense>
+    <v-app-bar elevation="2" app dense>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
         <!-- <span v-if="authenticated" class="font-weight-medium body-2">{{ usuario.data.nombre_completo }}</span> -->
@@ -82,16 +82,13 @@
         </v-menu>
     </v-app-bar>
     <v-main>
-        <v-container fluid>
             <router-view ></router-view>
-        </v-container>
     </v-main>
     <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
         {{snackbar.message_snack}}
     </v-snackbar>
 </v-app>
 </template>
-
 <script>
 import {
     mapGetters,

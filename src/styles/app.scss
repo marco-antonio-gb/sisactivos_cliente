@@ -1,80 +1,42 @@
 @import "~vue-advanced-cropper/dist/style.css";
-// .theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
-//   > .v-input__control
-//   > .v-input__slot
-//   fieldset {
-//   color: rgba(0, 0, 0, 0.155) !important;
-// }
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)
+	> .v-input__control
+	> .v-input__slot
+	fieldset {
+	color: rgba(0, 0, 0, 0.155) !important;
+}
+.theme--light.v-text-field > .v-input__control > .v-input__slot:before {
+    border-color: rgba(0, 0, 0, 0.155) !important;
+}
 html {
   overflow: auto !important;
 }
+body {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
 // .theme--light.v-app-bar.v-toolbar.v-sheet {
-//     background-color: #fff !important;
-//     border-bottom: 1px solid #eee !important;
+// 	background-color: #ffffff !important;
+// 	border-bottom: 1px solid #DFE3E8;
 // }
-// .v-application--is-ltr .v-list-item__action:first-child,
-// .v-application--is-ltr .v-list-item__icon:first-child {
-//   margin-right: 10px !important;
-// }
-// .avatar-shadow {
-//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-// // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-// }
-// .login-pa {
-//   padding: 48px 40px 36px !important;
-// }
-// .capitalize{
-//     text-transform: capitalize !important;
-// }
-// .lowercase{
-//    text-transform: lowercase !important;
-// }
-// .profile-pic-update {
-//   vertical-align: middle;
-//   width: 300px;
-//   height: 300px;
-//   border-radius: 50%;
-//   border: 1px solid rgba(230, 230, 230, 0.058);
-//   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-// }
-// .hover-icon {
-//   position: absolute;
-//   text-align: center !important;
-//   bottom: 5px;
-// }
-// .show-btns {
-//   color: rgba(255, 255, 255, 0) !important;
-// }
-// .theme--dark.v-navigation-drawer {
-//   background-color: #18181b !important;
-// }
-// .v-card__text,
-// .v-card__title,
-// .break-word {
-//   word-break: normal !important; /* maybe !important  */
-// }
-// .v-snack__content pre {
-//   font-family: "Roboto" !important;
-// }
-// .theme--dark.v-data-table
-//   > .v-data-table__wrapper
-//   > table
-//   > tbody
-//   > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
-//   background: rgba(47, 47, 47, 0.5) !important;
-// }
-// .uppercase {
-//   text-transform: uppercase !important;
-// }
-// .v-application--wrap{
-//     background-color: #ECF0F5 !important;
-// }
-// .v-btn--fab.v-size--small.v-btn--absolute.v-btn--bottom {
-//     bottom: -5px !important;
-// }
-// .v-sheet.v-card {
-//     border-radius: 8px !important;
-//   }
-//   .v-sheet.v-stepper {
-//     border-radius: 8px !important;
-//   }
+.theme--light.v-application {
+	background: #f9f9f9 !important;
+}
+.theme--dark.v-navigation-drawer {
+	background-color: #1e1e1e !important;
+}
+.v-snack__content pre {
+  font-family: "Roboto" !important;
+}
+.custom-link {
+	cursor: pointer;
+	color: var(--v-primary-base) !important;
+	font-weight: 400 !important;
+	text-decoration: none;
+	letter-spacing: 0.5px;
+}
+.custom-link:hover {
+	color: var(--v-linkhover-base) !important;
+	text-decoration: underline;
+	
+}
