@@ -20,7 +20,7 @@ body {
 // 	border-bottom: 1px solid #DFE3E8;
 // }
 .theme--light.v-application {
-	background: #f9f9f9 !important;
+	background: #F6F7F9 !important;
 }
 .theme--dark.v-navigation-drawer {
 	background-color: #1e1e1e !important;
@@ -31,12 +31,13 @@ body {
 .custom-link {
 	cursor: pointer;
 	color: var(--v-primary-base) !important;
-	font-weight: 400 !important;
 	text-decoration: none;
-	letter-spacing: 0.5px;
 }
 .custom-link:hover {
 	color: var(--v-linkhover-base) !important;
 	text-decoration: underline;
 	
+}
+.avatar-shadow{
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }

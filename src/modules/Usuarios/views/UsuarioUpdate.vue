@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-container fluid>
     <loader :onLoading="onLoading" />
     <div class="d-flex justify-space-between d-flex align-center  mb-3">
         <goback />
@@ -75,7 +75,7 @@
             </v-btn>
         </template>
     </v-snackbar>
-</div>
+</v-container>
 </template>
 <script>
 import {

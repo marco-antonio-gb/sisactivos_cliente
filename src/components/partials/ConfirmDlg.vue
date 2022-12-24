@@ -1,7 +1,7 @@
 <template>
 <v-dialog v-model="dialog" :max-width="options.width" :style="{ zIndex: options.zIndex }" persistent>
-    <v-card class="pb-3">
-        <v-card-title class="font-weight-regular color_title">
+    <v-card>
+        <v-card-title>
             <span>
                 {{ title }}
             </span>
@@ -10,8 +10,8 @@
                 <v-icon>mdi-close</v-icon>
             </v-btn>
         </v-card-title>
-        <v-card-text class="my-2">
-            <span v-show="!!message" v-html="message"></span>
+        <v-card-text>
+            <p v-show="!!message" v-html="message"></p>
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
@@ -37,7 +37,7 @@ export default {
             // title: 'Confirmar',
             options: {
                 color: "",
-                width: 505,
+                width: 510,
                 zIndex: 190,
                 noconfirm: false,
             },
@@ -72,10 +72,4 @@ export default {
     },
 };
 </script>
-<style scoped>
-.color_title{
-    font-size: 1.375rem !important;
-    color: #212121 !important;
-    
-}
-</style>
+ 

@@ -3,7 +3,7 @@
     <v-dialog v-model="dialogUpload" persistent max-width="500">
         <v-card>
             <v-card-title >
-                Subir imagen
+                Subir imagensssssssss
             </v-card-title>
             <v-card-text class="pt-6">
                 

@@ -1,8 +1,12 @@
 <template>
-<v-dialog v-model="crop_dialog" persistent max-width="500" scrollable>
+<v-dialog v-model="crop_dialog" persistent width="440" scrollable>
     <v-card outlined>
-        <v-card-title>
-            Recortar
+        <v-card-title class="body-1">
+            Recorta tu nueva foto de perfil
+            <v-spacer></v-spacer>
+            <v-btn @click="reset" icon small>
+                <v-icon>mdi-close</v-icon>
+            </v-btn>
         </v-card-title>
         <v-card-text class="d-flex align-center justify-center" style="min-height:200px">
             <div v-if="onLoading" class="text-center">
@@ -20,11 +24,8 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text depressed @click="reset">
-                Cancelar
-            </v-btn>
-            <v-btn color="primary" depressed @click="crop">
-                Aceptar
+            <v-btn block small color="primary" depressed @click="crop">
+                Establecer foto de perfil
             </v-btn>
         </v-card-actions>
     </v-card>
@@ -70,7 +71,7 @@ export default {
         closeDialog() {
             this.$emit('update:crop_dialog', false)
             this.$emit('clearInputImage')
-             
+
         },
         crop() {
             const {

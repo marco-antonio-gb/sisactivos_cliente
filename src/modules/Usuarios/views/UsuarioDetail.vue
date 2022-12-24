@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-container fluid>
     <!-- ---- HEADER ------ -->
     <loader :onLoading="onLoading" />
     <div class="d-flex justify-space-between d-flex align-center   mb-3">
@@ -167,7 +167,7 @@
         </template>
     </v-snackbar>
     <updatePassword :dialogUpdatePass.sync="dialogUpdatePass" @clickUpdatePass="clickUpdatePass" :usuario_id="this.$route.params.usuario_id" />
-</div>
+</v-container>
 </template>
 
 <script>
@@ -181,7 +181,7 @@ export default {
     data() {
         return {
             dialogImage: false,
-            url: process.env.VUE_APP_URL_MEDIA + '/usuarios/',
+            url: process.env.VUE_APP_URL_MEDIA + '/home/usuarios/fotos/',
             pass_data: " ",
             onblockUser: false,
             dialogUpdatePass: false,

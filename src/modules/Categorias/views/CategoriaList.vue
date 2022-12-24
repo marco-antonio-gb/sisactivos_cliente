@@ -1,5 +1,6 @@
 <template>
 <v-container fluid>
+   
     <div class="mb-3 d-flex align-center">
         <goback :main_title="true" :arrow="false" />
         <v-spacer></v-spacer>
@@ -39,24 +40,20 @@
                     <strong> {{item.nombre}}</strong>
                 </template>
                 <template v-slot:[`item.condicion`]="{item}">
-                    <v-icon :color="item.condicion?'success':'grey'" dense>mdi-check-circle</v-icon>
+                    <v-chip :color="item.condicion?'success':'error'" small>{{item.condicion?'Activado':'Desactivado'}}</v-chip>
                 </template>
                 <template v-slot:[`item.actions`]="{ item }">
-                    <v-icon dense class="mr-3" @click="$router.push({path:'/categorias/detail/'+item.idCategoria})">
-                        mdi-eye
-                    </v-icon>
-                    <v-icon dense class="mr-3" @click="$router.push({path:'/categorias/update/'+item.idCategoria})">
+                    <v-icon class="mr-3" @click="$router.push({path:'/categorias/update/'+item.idCategoria})">
                         mdi-pencil
                     </v-icon>
-                    <v-icon dense @click="delRol(item.idCategoria)">
+                    <v-icon @click="deleteConfirm(item.idCategoria)">
                         mdi-delete
                     </v-icon>
-                    <td></td>
                 </template>
             </v-data-table>
         </v-card-text>
     </v-card>
-    <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack">
+    <v-snackbar v-model="snackbar.show_snack" :right="true" :timeout="snackbar.timeout_snack" transition="slide-y-reverse-transition">
         <pre class="snackText">{{snackbar.message_snack}}</pre>
         <template v-slot:action="{ attrs }">
             <v-btn :color="snackbar.color_snack" text v-bind="attrs" @click="snackbar.show_snack = false">
@@ -109,7 +106,7 @@ export default {
                 show_snack: false,
                 message_snack: '',
                 color_snack: 'light',
-                timeout_snack: 5000
+                timeout_snack: 3000
             },
         }
     },
@@ -117,25 +114,12 @@ export default {
         this.getCategorias();
     },
     components: {
-        ConfirmDlg: () => import("@/components/partials/ConfirmDlg"),
+        ConfirmDlg: () => import("@/components/partials/ConfirmDlg")
+
     },
     mixins: [
-        CategoriaServices,
-
+        CategoriaServices
     ],
-    methods: {
-
-        async delRol(rol_id) {
-            if (
-                await this.$refs.confirm.open(
-                    "Confirmar",
-                    "Esta seguro que quiere eliminar este Rol?"
-                )
-            ) {
-                this.deleteRol(rol_id);
-            }
-        },
-
-    }
+    methods: {}
 }
 </script>

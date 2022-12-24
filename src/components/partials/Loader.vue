@@ -17,7 +17,7 @@ export default {
 			default: false,
 		},
         color:{
-            default:'error'
+            default:'primary'
         }
 	},
 };

@@ -1,12 +1,12 @@
 <template>
-<div>
+<v-container fluid>
     <div class="mb-3 d-flex align-center">
         <goback :main_title="true" :arrow="false" />
         <v-spacer></v-spacer>
         <v-btn icon @click="reloadUsuarios" title="Actualizar">
-            <v-icon>mdi-autorenew</v-icon>
+            <v-icon>mdi-reload</v-icon>
         </v-btn>
-        <v-menu bottom left>
+        <!-- <v-menu bottom left>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
                     <v-icon>mdi-dots-vertical</v-icon>
@@ -23,7 +23,7 @@
                     <v-list-item-title>Item menu A</v-list-item-title>
                 </v-list-item>
             </v-list>
-        </v-menu>
+        </v-menu> -->
     </div>
     <v-card>
         <v-card-title>
@@ -112,7 +112,7 @@
             </v-btn>
         </template>
     </v-snackbar>
-</div>
+</v-container>
 </template>
 <script>
 import {
@@ -124,7 +124,7 @@ export default {
     name: 'lista-usuarios',
     data() {
         return {
-            url: process.env.VUE_APP_URL_MEDIA + '/usuarios/',
+            url: process.env.VUE_APP_URL_MEDIA + '/home/usuarios/fotos/',
             toggle_none: null,
             singleSelect: false,
             selected: [],
@@ -144,7 +144,7 @@ export default {
                     value: 'telefono'
                 },
                 {
-                    text: 'Cuenta',
+                    text: 'Estado',
                     value: 'estado'
                 },
                 {

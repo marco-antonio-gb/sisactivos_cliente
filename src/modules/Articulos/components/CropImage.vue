@@ -2,20 +2,20 @@
 <v-dialog v-model="crop_dialog" persistent max-width="500" scrollable>
     <v-card outlined>
         <v-card-title>
-            Recortar imagen
+            Recortar imagensssssss
         </v-card-title>
         <v-card-text class="d-flex align-center justify-center" style="min-height:200px">
             <div v-if="onLoading" class="text-center">
                 <v-progress-circular indeterminate  width="3" size="20"></v-progress-circular>
                 <p class="text--secondary mt-2 caption">Cargando imagen...</p>
             </div>
-            <cropper v-else :src="cropImage" ref="cropper" class="cropper" stencil-component="circle-stencil" :canvas="{
+            <cropper v-else :src="cropImage" ref="cropper" class="cropper"   :canvas="{
 minHeight: 0,
 minWidth: 0,
 maxHeight: 500,
 maxWidth: 500,
 }" :stencil-props="{
-      aspectRatio: 1
+       
     }" />
         </v-card-text>
         <v-card-actions>
@@ -30,7 +30,6 @@ maxWidth: 500,
     </v-card>
 </v-dialog>
 </template>
-
 <script>
 import {
     Cropper
@@ -40,7 +39,6 @@ export default {
         return {
             onLoading: false,
             toggle_none: null,
-
             cropImage: null,
         }
     },
@@ -86,7 +84,6 @@ export default {
     },
     watch: {
         crop_dialog: {
-            // the callback will be called immediately after the start of the observation
             immediate: true,
             handler(val) {
                 if (val) {
@@ -101,6 +98,3 @@ export default {
     }
 }
 </script>
-
-<style>
-</style>

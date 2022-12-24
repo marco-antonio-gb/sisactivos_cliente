@@ -1,7 +1,6 @@
 <template>
-<v-app >
-    
-    <router-view ></router-view>
+<v-app>
+    <router-view></router-view>
 </v-app>
 </template>
 <script>
@@ -10,7 +9,8 @@ import {
 } from "vuex";
 export default {
     name: 'App',
-    components: {},
+    components: {
+    },
     data: () => ({
         version: process.env.VUE_APP_VERSION,
     }),
@@ -24,8 +24,7 @@ export default {
             return this.currentTheme
         }
     },
-    methods:{
-    }
+    methods: {}
 }
 </script>
 <style src="./styles/app.scss" lang="scss"/>

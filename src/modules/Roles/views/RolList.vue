@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-container fluid>
     <div class="mb-3 d-flex align-center">
        <h1 class="headline font-weight-bold">{{$route.meta.title}}</h1>
 
@@ -41,7 +41,7 @@
     </v-snackbar>
 
     <ConfirmDlg ref="confirm" />
-</div>
+</v-container>
 </template>
 
 <script>

@@ -13,13 +13,13 @@ export default {
         {
 			title: "Articulos",
 			href: "/articulos",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-seat",
 			role: [ "Administrador", "Asistente"]
 		},
         {
 			title: "Categorias",
 			href: "/categorias",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-tag",
 			role: [ "Administrador", "Asistente"]
 		},
         {
@@ -29,13 +29,13 @@ export default {
         {
 			title: "Responsables",
 			href: "/responsables",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-account-check",
 			role: [ "Administrador", "Asistente"]
 		},
         {
 			title: "Asignacion",
-			href: "/asignacion",
-			icon: "mdi-file-document-multiple",
+			href: "/asignaciones",
+			icon: "mdi-account-details",
 			role: [ "Administrador", "Asistente"]
 		},
         {
@@ -45,13 +45,13 @@ export default {
         {
 			title: "Salidas",
 			href: "/salidas",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-file-document-arrow-right",
 			role: [ "Administrador", "Asistente"]
 		},
         {
 			title: "Transferencias",
 			href: "/transferencias",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-folder-arrow-left-right",
 			role: [ "Administrador", "Asistente"]
 		},
         {
@@ -74,6 +74,18 @@ export default {
         {
 			title: "Ajustes",
 			href: "/settings",
+			icon: "mdi-cog",
+			role: [ "Administrador", ]
+		},
+        {
+			title: "Servicios",
+			href: "/servicios",
+			icon: "mdi-cog",
+			role: [ "Administrador", ]
+		},
+        {
+			title: "Org. Financieros",
+			href: "/orgfinancieros",
 			icon: "mdi-cog",
 			role: [ "Administrador", ]
 		},

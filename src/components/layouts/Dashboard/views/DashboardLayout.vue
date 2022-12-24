@@ -14,7 +14,7 @@
         </template>
         <Sidebar></Sidebar>
     </v-navigation-drawer>
-    <v-app-bar elevation="2" app dense>
+    <v-app-bar   elevation="3" app dense>
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
         <!-- <span v-if="authenticated" class="font-weight-medium body-2">{{ usuario.data.nombre_completo }}</span> -->
@@ -98,7 +98,7 @@ import Sidebar from "../components/Sidebar";
 export default {
     data() {
         return {
-            url: process.env.VUE_APP_URL_MEDIA + '/usuarios/',
+            url: process.env.VUE_APP_URL_MEDIA + '/home/usuarios/fotos/',
             AvatarLetter: "",
             avatarClass: "",
             initial: "",

@@ -18,25 +18,25 @@ const routes = {
 			name: "articulosList",
 			component: ArticuloList,
 			meta: {
-				title: "Articulos",
+				title: "Artículos",
 				permissions: ["Administrador"],
 			},
 		},
 		{
 			path: "/articulos/create",
-			name: "articulosCreate",
+			name: "articuloCreate",
 			component: ArticuloCreate,
 			meta: {
-				title: "Crear articulo",
+				title: "Crear artículos",
 				permissions: ["Administrador"],
 			},
 		},
 		{
 			path: "/articulos/detail/:idArticulo",
-			name: "articulosDetail",
+			name: "articuloDetail",
 			component: ArticuloDetail,
 			meta: {
-				title: "Detalle articulo",
+				title: "Detalle artículos",
 				permissions: ["Administrador"],
 			},
 		},
@@ -45,7 +45,7 @@ const routes = {
 			name: "ArticuloUpdate",
 			component: ArticuloUpdate,
 			meta: {
-				title: "Actualizar informacion  ",
+				title: "Actualizar artículos",
 				permissions: ["Administrador"],
 			},
 		},

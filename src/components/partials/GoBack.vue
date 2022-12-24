@@ -10,8 +10,8 @@
         </h4>
     </div>
     <div class="d-flex flex-column" v-else>
-        <h1 class=" uppercase-text" v-if="main_title">{{ $route.meta.title}}</h1>
-        <h4 class="" v-else>{{$route.meta.title}} </h4>
+        <h2  v-if="main_title">{{ $route.meta.title}}</h2>
+        <h3 class="title" v-else>{{$route.meta.title}} </h3>
         <small class="grey--text ">{{sub_title}}</small>
     </div>
 </div>

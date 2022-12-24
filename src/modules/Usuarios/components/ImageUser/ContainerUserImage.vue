@@ -8,7 +8,7 @@
     <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
             <v-btn small v-bind="attrs" v-on="on">
-                <v-icon class="mr-2">mdi-tray-arrow-up</v-icon> Agregar foto
+                <v-icon class="mr-2">mdi-tray-arrow-up</v-icon> Recorta tu nueva foto de perfilssssssssssssssssssss
             </v-btn>
         </template>
         <v-list nav dense>

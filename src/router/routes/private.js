@@ -8,6 +8,10 @@ import perfilRoutes from "@/modules/Perfil/router";
 import articulosRoutes from '@/modules/Articulos/router'
 import personasRoutes from '@/modules/Personas/router'
 import categoriasRoutes from '@/modules/Categorias/router'
+import serviciosRoutes from '@/modules/Servicios/router'
+import responsablesRoutes from '@/modules/Responsables/router'
+import orgfinancierosRoutes from '@/modules/Orgfinancieros/router'
+import asignacionesRoutes from '@/modules/Asignaciones/router'
 import {
 	_suspendaccount,
 	_unauthorized,
@@ -49,6 +53,10 @@ const routes = [
 			{ ...usuariosRoutes },
 			{ ...categoriasRoutes },
 			{ ...articulosRoutes },
+			{ ...serviciosRoutes },
+			{ ...responsablesRoutes },
+			{ ...orgfinancierosRoutes },
+			{ ...asignacionesRoutes },
 		],
 	},
 	{ ..._suspendaccount },

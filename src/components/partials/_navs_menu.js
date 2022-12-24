@@ -13,7 +13,7 @@ export default {
         {
 			title: "Articulos",
 			href: "/articulos",
-			icon: "mdi-file-document-multiple",
+			icon: "mdi-seat",
 			role: [ "Administrador", "Asistente"]
 		},
         {
